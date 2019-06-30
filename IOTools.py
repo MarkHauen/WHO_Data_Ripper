@@ -10,12 +10,12 @@ def getFileLines(fileName):
     with open(getDataPath(fileName), mode='rt') as reader:
         return reader.readlines()
 
-def getDataHeaders(fileName):
-    return getFileLines(fileName)[0]
+def getDataHeaders():
+    return getFileLines("LifeExpectancyDataRAW")[0]
 
 def getDataLines(fileName):
     return getFileLines(fileName)[1:]
 
 def writeDataLines(fileName, dataLines):
 	with open("{r}\\{fn}.csv".format(r=getRoot(), fn=fileName), mode='wt') as writer:
-		writer.write(dataLines)
+		writer.write("{h}{dl}".format(h=getDataHeaders(), dl=dataLines))

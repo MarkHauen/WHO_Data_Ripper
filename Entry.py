@@ -24,30 +24,41 @@ class Entry:
         self.Schooling = getEntry(line, 21)
     def getCsvLine(self):
         return ",".join([
-             self.Country,
-             self.Year,
-             self.Status,
-             self.Life_Expectancy,
-             self.Adult_Mortality,
-             self.Infant_Deaths,
-             self.Alcohol,
-             self.PercentageExpenditure,
-             self.Hepatitis_B,
-             self.Measles,
-             self.BMI,
-             self.Under_Five_Deaths,
-             self.Polio,
-             self.TotalExpenditure,
-             self.Diphtheria,
-             self.HIV_AIDS,
-             self.GDP,
-             self.Population,
-             self.Thinness_1_19_Years,
-             self.Thinness_5_9_Years,
-             self.Income_Composition_Of_Resources,
-             self.Schooling
-             ])
+            self.Country,
+            str(self.Year),
+            self.Status,
+            str(self.Life_Expectancy),
+            str(self.Adult_Mortality),
+            str(self.Infant_Deaths),
+            str(self.Alcohol),
+            str(self.PercentageExpenditure),
+            str(self.Hepatitis_B),
+            str(self.Measles),
+            str(self.BMI),
+            str(self.Under_Five_Deaths),
+            str(self.Polio),
+            str(self.TotalExpenditure),
+            str(self.Diphtheria),
+            str(self.HIV_AIDS),
+            str(self.GDP),
+            str(self.Population),
+            str(self.Thinness_1_19_Years),
+            str(self.Thinness_5_9_Years),
+            str(self.Income_Composition_Of_Resources),
+            str(self.Schooling)
+            ])
+
+
+def isNotEmpty(entry):
+    return len(entry) > 0
+
+def actualType(entry):
+    try:
+        return float(entry)
+    except ValueError:
+        return entry
 
 def getEntry(line, index):
-    entry = line.split(",")[index]
-    return entry if len(entry) > 0 else 'NA'
+    entry = line.split(",")[index].replace("\n", "").replace("\r", "")
+    return actualType(entry) if isNotEmpty(entry) else 'na'
+
